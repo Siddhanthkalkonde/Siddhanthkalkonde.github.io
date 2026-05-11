@@ -11,15 +11,12 @@
     --bg: #0c0c0c; --surface: #141414; --surface2: #1c1c1c;
     --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
     --text: #f0ede8; --muted: #888880;
-    --accent: #d4f244; --accent2: #4af0b4; --accent3: #f0844a;
+    --accent: #d4f244; --accent2: #4af0b4; --accent3: #f0844a; --accent4: #c084fc;
     --mono: 'Space Mono', monospace; --sans: 'Syne', sans-serif;
   }
   body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
-
   canvas#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
   .grid-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 48px 48px; }
-
   .wrap { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
   nav { display: flex; align-items: center; justify-content: space-between; padding: 24px 0; border-bottom: 1px solid var(--border); }
@@ -34,14 +31,14 @@
   h1 { font-size: clamp(38px, 7vw, 64px); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 20px; }
   h1 em { font-style: normal; color: var(--accent); }
   .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 540px; margin-bottom: 12px; }
-  .hero-contact { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 0; }
+  .hero-contact { display: flex; gap: 20px; flex-wrap: wrap; }
   .hero-contact span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
   .hero-contact span b { color: var(--text); font-weight: 400; }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--border); border-radius: 4px; margin: 56px 0; overflow: hidden; }
   .stat { padding: 22px 18px; border-right: 1px solid var(--border); }
   .stat:last-child { border-right: none; }
-  .stat-num { font-family: var(--mono); font-size: 26px; font-weight: 700; color: var(--accent); display: block; }
+  .stat-num { font-family: var(--mono); font-size: 24px; font-weight: 700; color: var(--accent); display: block; }
   .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
   .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; padding-top: 56px; border-top: 1px solid var(--border); }
@@ -51,16 +48,20 @@
   .projects { display: flex; flex-direction: column; gap: 8px; }
   .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 24px; transition: border-color 0.2s, background 0.2s; }
   .project-card:hover { border-color: var(--border2); background: var(--surface2); }
+  .project-card.freelance { border-left: 2px solid rgba(192,132,252,0.4); }
   .proj-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
   .proj-tag { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+  .proj-tag.purple { color: var(--accent4); }
   .proj-name { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
   .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
   .proj-stack { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip { font-family: var(--mono); font-size: 10px; padding: 3px 9px; background: rgba(255,255,255,0.05); border: 1px solid var(--border2); border-radius: 2px; color: var(--muted); letter-spacing: 0.04em; }
   .chip.hl { background: rgba(212,242,68,0.08); border-color: rgba(212,242,68,0.2); color: var(--accent); }
+  .chip.purple { background: rgba(192,132,252,0.08); border-color: rgba(192,132,252,0.2); color: var(--accent4); }
   .proj-badge { font-family: var(--mono); font-size: 10px; padding: 3px 10px; border-radius: 2px; letter-spacing: 0.07em; white-space: nowrap; flex-shrink: 0; }
   .badge-live { background: rgba(74,240,180,0.1); color: var(--accent2); border: 1px solid rgba(74,240,180,0.2); }
   .badge-wip { background: rgba(212,242,68,0.1); color: var(--accent); border: 1px solid rgba(212,242,68,0.2); }
+  .badge-freelance { background: rgba(192,132,252,0.1); color: var(--accent4); border: 1px solid rgba(192,132,252,0.2); }
   .badge-dev { background: rgba(240,132,74,0.1); color: var(--accent3); border: 1px solid rgba(240,132,74,0.2); }
 
   .exp-list { display: flex; flex-direction: column; }
@@ -69,7 +70,10 @@
   .exp-company { font-size: 12px; font-weight: 600; color: var(--text); }
   .exp-period { font-family: var(--mono); font-size: 10px; color: var(--muted); }
   .exp-loc { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-  .exp-badge { display: inline-block; font-family: var(--mono); font-size: 9px; padding: 2px 8px; border-radius: 2px; margin-bottom: 8px; background: rgba(240,132,74,0.1); color: var(--accent3); border: 1px solid rgba(240,132,74,0.2); letter-spacing: 0.07em; }
+  .exp-badge { display: inline-block; font-family: var(--mono); font-size: 9px; padding: 2px 8px; border-radius: 2px; margin-bottom: 8px; letter-spacing: 0.07em; }
+  .eb-intern { background: rgba(240,132,74,0.1); color: var(--accent3); border: 1px solid rgba(240,132,74,0.2); }
+  .eb-lead { background: rgba(74,240,180,0.1); color: var(--accent2); border: 1px solid rgba(74,240,180,0.2); }
+  .eb-freelance { background: rgba(192,132,252,0.1); color: var(--accent4); border: 1px solid rgba(192,132,252,0.2); }
   .exp-role { font-size: 15px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
   .exp-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
 
@@ -86,6 +90,12 @@
   .edu-deg { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
   .edu-inst { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
   .edu-period { font-family: var(--mono); font-size: 10px; color: var(--accent); }
+
+  .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 0; }
+  .highlight-card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 18px; }
+  .highlight-icon { font-size: 20px; margin-bottom: 10px; }
+  .highlight-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .highlight-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
   .contact-section { padding: 56px 0 72px; text-align: center; }
   .contact-section h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px; }
@@ -106,12 +116,13 @@
 <body>
 <canvas id="particles"></canvas>
 <div class="grid-bg"></div>
-
 <div class="wrap">
+
   <nav>
     <span class="nav-logo">SIDDHANTH.DEV</span>
     <div class="nav-links">
       <a href="#projects">Projects</a>
+      <a href="#freelance">Freelance</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -121,7 +132,7 @@
   <section class="hero">
     <div class="hero-tag fu">Open to opportunities · Pune, India</div>
     <h1 class="fu2">Siddhanth<br>Kalkonde<br><em>Embedded &amp; Robotics</em></h1>
-    <p class="hero-desc fu3">BTech Mechanical Engineering (R&AI) student at MIT ADT University. Secretary & Electronics Lead at Team Volta. PCB design intern at Defence Forge Industries. I build from schematic to deployment — firmware, PCBs, ML pipelines, and autonomous systems.</p>
+    <p class="hero-desc fu3">BTech Mechanical Engineering (R&AI) at MIT ADT University. Secretary & Electronics Lead at Team Volta. PCB intern at Defence Forge Industries. I build from schematic to deployment — firmware, PCBs, autonomous systems, and ML pipelines. Freelance embedded engineer with hands-on client project delivery.</p>
     <div class="hero-contact fu3">
       <span>✉ <b>siddhanth.kalkonde@yahoo.com</b></span>
       <span>📞 <b>9730029285</b></span>
@@ -130,12 +141,13 @@
   </section>
 
   <div class="stats">
-    <div class="stat"><span class="stat-num">7+</span><span class="stat-label">Projects Built</span></div>
+    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Projects Built</span></div>
     <div class="stat"><span class="stat-num">3</span><span class="stat-label">Internships</span></div>
-    <div class="stat"><span class="stat-num">2</span><span class="stat-label">PCBs Designed</span></div>
+    <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Freelance Builds</span></div>
     <div class="stat"><span class="stat-num">ABU</span><span class="stat-label">Robocon Club</span></div>
   </div>
 
+  <!-- CORE PROJECTS -->
   <section id="projects">
     <div class="section-header"><span class="section-num">01</span><h2>Projects</h2></div>
     <div class="projects">
@@ -156,6 +168,15 @@
         </div>
         <div class="proj-desc">ESP32 sensor node transmitting six-channel binary UART packets to a Raspberry Pi dashboard on an ILI9341 TFT — ultrasonic distance, gas, smoke, temperature, voltage, and RPM. Animated PIL gauge UI with EMA smoothing and system log overlay.</div>
         <div class="proj-stack"><span class="chip hl">ESP32</span><span class="chip">Raspberry Pi</span><span class="chip">ILI9341 TFT</span><span class="chip">UART Binary Protocol</span><span class="chip">Python / PIL</span><span class="chip">HC-SR04</span></div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-header">
+          <div><div class="proj-tag">Aerospace · Firmware</div><div class="proj-name">Embedded Flight Controller for Rocket</div></div>
+          <span class="proj-badge badge-live">Completed</span>
+        </div>
+        <div class="proj-desc">Designed and programmed an embedded flight controller for a small-scale rocket — handling sensor acquisition, stabilisation logic, and actuation. Custom firmware built for real-time reliability under high-vibration launch conditions.</div>
+        <div class="proj-stack"><span class="chip hl">Embedded C/C++</span><span class="chip">IMU / Sensor Fusion</span><span class="chip">Real-time Firmware</span><span class="chip">Actuation Control</span></div>
       </div>
 
       <div class="project-card">
@@ -181,42 +202,115 @@
           <div><div class="proj-tag">PCB Design · IoT</div><div class="proj-name">Custom ESP32 Development Board</div></div>
           <span class="proj-badge badge-live">Completed</span>
         </div>
-        <div class="proj-desc">Designed and manufactured a custom ESP32 development board with DIY PCB fabrication. Full schematic design, layout, and bring-up — purpose-built for rapid embedded prototyping.</div>
+        <div class="proj-desc">Designed and manufactured a custom ESP32 development board with DIY PCB fabrication. Full schematic, layout, and bring-up — purpose-built for rapid embedded prototyping.</div>
         <div class="proj-stack"><span class="chip hl">ESP32</span><span class="chip">KiCad</span><span class="chip">DIY Fabrication</span><span class="chip">Embedded C</span></div>
       </div>
 
-      <div class="project-card">
+    </div>
+  </section>
+
+  <!-- FREELANCE PROJECTS -->
+  <section id="freelance">
+    <div class="section-header"><span class="section-num">02</span><h2>Freelance Projects</h2></div>
+    <div class="projects">
+
+      <div class="project-card freelance">
         <div class="proj-header">
-          <div><div class="proj-tag">IoT · Home Automation</div><div class="proj-name">ESP32 Home Automation System</div></div>
-          <span class="proj-badge badge-live">Completed</span>
+          <div><div class="proj-tag purple">Freelance · EV · Dashboard</div><div class="proj-name">Smart Dashboard for EV Vehicles</div></div>
+          <span class="proj-badge badge-freelance">Freelance</span>
         </div>
-        <div class="proj-desc">ESP32-based home automation system with WiFi connectivity for remote device control. Custom development board with full web interface for appliance management.</div>
-        <div class="proj-stack"><span class="chip hl">ESP32</span><span class="chip">WiFi</span><span class="chip">Web UI</span><span class="chip">Embedded C</span></div>
+        <div class="proj-desc">Designed and built a smart real-time dashboard for electric vehicles using Raspberry Pi — displaying speed, battery level, motor temperature, and system health on a custom UI. Full hardware and software integration delivered for client.</div>
+        <div class="proj-stack"><span class="chip purple">Raspberry Pi</span><span class="chip">Python</span><span class="chip">Custom UI</span><span class="chip">EV Sensors</span><span class="chip">Real-time Display</span></div>
+      </div>
+
+      <div class="project-card freelance">
+        <div class="proj-header">
+          <div><div class="proj-tag purple">Freelance · Aerospace · Firmware</div><div class="proj-name">Embedded Flight Controller for Rocket</div></div>
+          <span class="proj-badge badge-freelance">Freelance</span>
+        </div>
+        <div class="proj-desc">Custom flight controller firmware for a small-scale rocket — sensor acquisition, real-time stabilisation logic, and actuator control. Built for reliability under high-vibration and time-critical launch conditions.</div>
+        <div class="proj-stack"><span class="chip purple">Embedded C/C++</span><span class="chip">IMU Sensor Fusion</span><span class="chip">Real-time Firmware</span><span class="chip">Actuation</span></div>
+      </div>
+
+      <div class="project-card freelance">
+        <div class="proj-header">
+          <div><div class="proj-tag purple">Freelance · PCB Mentorship</div><div class="proj-name">PCB Design Mentorship — SIH Groups</div></div>
+          <span class="proj-badge badge-freelance">Mentorship</span>
+        </div>
+        <div class="proj-desc">Mentored Smart India Hackathon (SIH) teams on PCB design — guiding schematic creation, component selection, layout best practices, and DFM. Helped multiple groups go from concept to fabrication-ready Gerber files.</div>
+        <div class="proj-stack"><span class="chip purple">KiCad</span><span class="chip">PCB Layout</span><span class="chip">Schematic Design</span><span class="chip">DFM</span><span class="chip">Mentorship</span></div>
+      </div>
+
+      <div class="project-card freelance">
+        <div class="proj-header">
+          <div><div class="proj-tag purple">Freelance · Embedded · IoT</div><div class="proj-name">Small-Scale Embedded Systems — Multiple Clients</div></div>
+          <span class="proj-badge badge-freelance">Freelance</span>
+        </div>
+        <div class="proj-desc">Delivered multiple client projects including: obstacle avoiding robot (ultrasonic + IR sensors), voice command elevator system, smoke detection system (MQ sensors + flame sensor), smart water dispenser, and smart car valet system — all using commonly used sensor suites built and deployed end-to-end.</div>
+        <div class="proj-stack"><span class="chip purple">Arduino / ESP32</span><span class="chip">Ultrasonic Sensor</span><span class="chip">IR Sensor</span><span class="chip">MQ Gas Sensors</span><span class="chip">Flame Sensor</span><span class="chip">Servo / Motor Control</span></div>
       </div>
 
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="section-header"><span class="section-num">02</span><h2>Experience</h2></div>
+    <div class="section-header"><span class="section-num">03</span><h2>Experience</h2></div>
     <div class="exp-list">
+
       <div class="exp-item">
         <div class="exp-left"><span class="exp-company">Defence Forge Industries</span><span class="exp-period">Dec 2025 – Feb 2026</span><span class="exp-loc">Pune</span></div>
-        <div><div class="exp-badge">INTERNSHIP</div><div class="exp-role">PCB Design Intern</div><div class="exp-desc">PCB design and R&D at a private defence-sector company. Worked on mission-critical board design for national defence products — schematic, layout, and DFM for defence-grade hardware.</div></div>
+        <div><div class="exp-badge eb-intern">INTERNSHIP</div><div class="exp-role">PCB Design Intern</div><div class="exp-desc">PCB design and R&D for national defence products — schematic, layout, and design-for-manufacture for defence-grade hardware requiring strict reliability standards.</div></div>
       </div>
+
       <div class="exp-item">
         <div class="exp-left"><span class="exp-company">MIT ADT Team Volta</span><span class="exp-period">Aug 2024 – Present</span><span class="exp-loc">Loni Kalbhor, Pune</span></div>
-        <div><div class="exp-badge">LEADERSHIP</div><div class="exp-role">Secretary & Electronics & Programming Lead</div><div class="exp-desc">Leading electronics and programming for MIT ADT's top robotics club competing at ABU Robocon internationally. Custom PCB design, embedded circuit development, outsourcing, PR, and club operations.</div></div>
+        <div><div class="exp-badge eb-lead">LEADERSHIP</div><div class="exp-role">Secretary & Electronics & Programming Lead</div><div class="exp-desc">Leading electronics and programming for MIT ADT's ABU Robocon robotics club. Custom PCB design, embedded circuit development, team management, outsourcing, PR, and sponsorship acquisition.</div></div>
       </div>
+
       <div class="exp-item">
         <div class="exp-left"><span class="exp-company">Suhrudh Consultants</span><span class="exp-period">Jul 2024 – Oct 2024</span><span class="exp-loc">Thane / WFH</span></div>
-        <div><div class="exp-badge">INTERNSHIP</div><div class="exp-role">AI Developer Intern</div><div class="exp-desc">Built an autonomous company research AI agent using n8n automation workflows. Integrated Claude and Perplexity AI APIs with Google Sheets and Supabase for end-to-end B2B lead generation workflows.</div></div>
+        <div><div class="exp-badge eb-intern">INTERNSHIP</div><div class="exp-role">AI Developer Intern</div><div class="exp-desc">Built an autonomous company research AI agent using n8n automation, Claude and Perplexity AI APIs, Google Sheets, and Supabase for end-to-end B2B lead generation workflows.</div></div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left"><span class="exp-company">Independent</span><span class="exp-period">2023 – Present</span><span class="exp-loc">Pune</span></div>
+        <div><div class="exp-badge eb-freelance">FREELANCE</div><div class="exp-role">Embedded Systems Freelancer</div><div class="exp-desc">Delivered embedded hardware and firmware projects for clients — EV dashboards, flight controllers, IoT automation systems, and sensor-based robotics builds. End-to-end ownership from requirement to delivery.</div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LEADERSHIP & ACHIEVEMENTS -->
+  <section>
+    <div class="section-header"><span class="section-num">04</span><h2>Leadership & Achievements</h2></div>
+    <div class="highlights">
+      <div class="highlight-card">
+        <div class="highlight-icon">🚁</div>
+        <div class="highlight-title">Drone Workshop Organiser</div>
+        <div class="highlight-desc">Organised and ran drone workshops — handling end-to-end event planning, participant coordination, hardware logistics, and technical instruction delivery.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">💰</div>
+        <div class="highlight-title">External Funding Raised</div>
+        <div class="highlight-desc">Raised external funding for a mini project in 2023–24 through off-campus outreach — pitching, negotiation, and stakeholder management.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🤝</div>
+        <div class="highlight-title">Sponsorship Acquisition</div>
+        <div class="highlight-desc">Secured sponsorships for Team Volta's Robocon campaigns — identifying partners, drafting proposals, and managing ongoing relationships.</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">🏫</div>
+        <div class="highlight-title">SIH PCB Mentor</div>
+        <div class="highlight-desc">Mentored Smart India Hackathon groups on PCB design — schematic to Gerber — helping teams meet competition hardware deadlines.</div>
       </div>
     </div>
   </section>
 
+  <!-- SKILLS -->
   <section id="skills">
-    <div class="section-header"><span class="section-num">03</span><h2>Skills</h2></div>
+    <div class="section-header"><span class="section-num">05</span><h2>Skills</h2></div>
     <div class="skills-grid">
       <div class="skill-group">
         <div class="skill-group-title">Hardware</div>
@@ -231,7 +325,7 @@
         <div class="skill-list">
           <div class="skill-item"><span>ESP32</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:95%"></div></div></div>
           <div class="skill-item"><span>STM32</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
-          <div class="skill-item"><span>Raspberry Pi</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+          <div class="skill-item"><span>Raspberry Pi</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
           <div class="skill-item"><span>Jetson Orin Nano</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
         </div>
       </div>
@@ -245,19 +339,20 @@
         </div>
       </div>
       <div class="skill-group">
-        <div class="skill-group-title">Protocols & Tools</div>
+        <div class="skill-group-title">Soft Skills</div>
         <div class="skill-list">
-          <div class="skill-item"><span>UART / I2C / SPI</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:92%"></div></div></div>
-          <div class="skill-item"><span>LoRa / WiFi</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
-          <div class="skill-item"><span>n8n Automation</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
-          <div class="skill-item"><span>AI APIs</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+          <div class="skill-item"><span>Event Management</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+          <div class="skill-item"><span>Sponsorship / PR</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></div>
+          <div class="skill-item"><span>Team Leadership</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div></div>
+          <div class="skill-item"><span>Outsourcing</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- EDUCATION -->
   <section>
-    <div class="section-header"><span class="section-num">04</span><h2>Education</h2></div>
+    <div class="section-header"><span class="section-num">06</span><h2>Education</h2></div>
     <div class="edu-grid">
       <div class="edu-card">
         <div class="edu-deg">BTech — Mechanical Engineering (R&AI)</div>
@@ -272,9 +367,10 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="contact-section">
     <h2>Let's work together</h2>
-    <p>Open to embedded systems, robotics, PCB design, firmware, and AI/ML roles.</p>
+    <p>Open to embedded systems, robotics, PCB design, firmware, AI/ML roles, and freelance projects.</p>
     <div class="contact-links">
       <a class="contact-link" href="mailto:siddhanth.kalkonde@yahoo.com">✉ Email</a>
       <a class="contact-link" href="tel:9730029285">📞 9730029285</a>
@@ -291,71 +387,31 @@
 <script>
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
-
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = document.body.scrollHeight;
-}
+function resize() { canvas.width = window.innerWidth; canvas.height = document.body.scrollHeight; }
 resize();
-window.addEventListener('resize', () => { resize(); });
-
+window.addEventListener('resize', resize);
 const COUNT = 160;
 const particles = [];
-
 for (let i = 0; i < COUNT; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 1.8 + 0.3,
-    opacity: Math.random() * 0.55 + 0.1,
-    vx: (Math.random() - 0.5) * 0.6,
-    vy: (Math.random() - 0.5) * 0.6,
-    ax: 0, ay: 0,
-    changeTimer: Math.random() * 180,
-  });
+  particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 1.8 + 0.3, opacity: Math.random() * 0.55 + 0.1, vx: (Math.random() - 0.5) * 0.6, vy: (Math.random() - 0.5) * 0.6, ax: 0, ay: 0, changeTimer: Math.random() * 180 });
 }
-
-function update() {
+function loop() {
   for (const p of particles) {
     p.changeTimer--;
-    if (p.changeTimer <= 0) {
-      p.ax = (Math.random() - 0.5) * 0.04;
-      p.ay = (Math.random() - 0.5) * 0.04;
-      p.changeTimer = 90 + Math.random() * 150;
-    }
-    p.vx += p.ax;
-    p.vy += p.ay;
+    if (p.changeTimer <= 0) { p.ax = (Math.random() - 0.5) * 0.04; p.ay = (Math.random() - 0.5) * 0.04; p.changeTimer = 90 + Math.random() * 150; }
+    p.vx += p.ax; p.vy += p.ay;
     const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
     if (speed > 0.9) { p.vx = (p.vx / speed) * 0.9; p.vy = (p.vy / speed) * 0.9; }
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0) p.x = canvas.width;
-    if (p.x > canvas.width) p.x = 0;
-    if (p.y < 0) p.y = canvas.height;
-    if (p.y > canvas.height) p.y = 0;
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0) p.x = canvas.width; if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
   }
-}
-
-function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const p of particles) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
-    ctx.fill();
-  }
-}
-
-function loop() {
-  update();
-  draw();
+  for (const p of particles) { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(255,255,255,${p.opacity})`; ctx.fill(); }
   requestAnimationFrame(loop);
 }
 loop();
-
-window.addEventListener('scroll', () => {
-  resize();
-});
+window.addEventListener('scroll', resize);
 </script>
 </body>
 </html>
